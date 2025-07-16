@@ -18,45 +18,50 @@ const Header: React.FC<HeaderProps> = ({ onToggleSidebar }) => {
   };
 
   return (
-    <header className="bg-white shadow-md">
-      <div className="container py-4 flex items-center justify-between">
+    <header className="sticky top-0 z-50 bg-white/70 backdrop-blur-md border-b border-orange-100 shadow-lg transition-all">
+      <div className="container mx-auto px-4 py-3 flex items-center justify-between">
         {/* Left: Logo */}
-        <div className="text-2xl font-bold text-gray-800 hover:text-gray-600 whitespace-nowrap">
-          <Link href="/">Restaurant</Link>
+        <div className="flex items-center gap-2 text-2xl font-extrabold text-orange-500 whitespace-nowrap tracking-tight drop-shadow">
+          <svg className="w-8 h-8 text-orange-400" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" fill="url(#orangeGrad)"/>
+            <defs>
+              <linearGradient id="orangeGrad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stopColor="#fbbf24" />
+                <stop offset="100%" stopColor="#f97316" />
+              </linearGradient>
+            </defs>
+          </svg>
+          <Link href="/" className="hover:text-orange-600 transition-colors">Restaurant</Link>
         </div>
 
         {/* Center: Nav Links */}
-        <nav className="flex-1 hidden md:flex justify-center gap-6">
-          <Link
-            href="/"
-            className="text-gray-700 hover:text-gray-900 font-medium"
-          >
-            Home
-          </Link>
-          <Link
-            href="/about"
-            className="text-gray-700 hover:text-gray-900 font-medium"
-          >
-            About
-          </Link>
-          <Link
-            href="/services"
-            className="text-gray-700 hover:text-gray-900 font-medium"
-          >
-            Services
-          </Link>
+        <nav className="flex-1 hidden md:flex justify-center gap-8">
+          {[
+            { href: "/", label: "Home" },
+            { href: "/about", label: "About" },
+            { href: "/services", label: "Services" },
+          ].map(({ href, label }) => (
+            <Link
+              key={label}
+              href={href}
+              className="relative text-gray-700 hover:text-orange-500 font-medium px-2 transition-colors duration-200 group"
+            >
+              {label}
+              <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-gradient-to-r from-orange-400 to-orange-500 rounded-full transition-all duration-300 group-hover:w-full"></span>
+            </Link>
+          ))}
         </nav>
 
         {/* Right: Login/Signup */}
-        <div className="hidden md:flex gap-2">
+        <div className="hidden md:flex gap-3">
           <button
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded cursor-pointer"
+            className="bg-orange-500 hover:bg-orange-600 focus:ring-4 focus:ring-orange-200 text-white font-bold py-2 px-6 rounded-full shadow transition-all duration-200 outline-none"
             onClick={handleLogin}
           >
             Login
           </button>
           <button
-            className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded cursor-pointer"
+            className="bg-white border-2 border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white font-bold py-2 px-6 rounded-full shadow transition-all duration-200 outline-none"
             onClick={handleSignup}
           >
             Signup

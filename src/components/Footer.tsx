@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 
 const Footer: React.FC = () => (
-  <footer className="bg-gray-200 py-4 mt-auto">
+  <footer className="bg-gray-200 py-4">
     <div className="container">
       <ul className="flex justify-start space-x-4">
         <li>
