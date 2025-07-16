@@ -1,10 +1,11 @@
 "use client";
 import React from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Sidebar from "@/components/Sidebar";
 
 const Header: React.FC = () => {
+  const pathname = usePathname();
   const router = useRouter();
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -57,16 +58,25 @@ const Header: React.FC = () => {
               { href: "/", label: "Home" },
               { href: "/about", label: "About" },
               { href: "/services", label: "Services" },
-            ].map(({ href, label }) => (
-              <Link
-                key={label}
-                href={href}
-                className="relative text-gray-700 hover:text-orange-500 font-medium px-2 transition-colors duration-200 group"
-              >
-                {label}
-                <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-gradient-to-r from-orange-400 to-orange-500 rounded-full transition-all duration-300 group-hover:w-full"></span>
-              </Link>
-            ))}
+            ].map(({ href, label }) => {
+              const isActive = pathname === href;
+              return (
+                <Link
+                  key={label}
+                  href={href}
+                  className={`relative text-gray-700 hover:text-orange-500 font-medium px-2 transition-colors duration-200 group${
+                    isActive ? " text-orange-500" : ""
+                  }`}
+                >
+                  {label}
+                  <span
+                    className={`absolute left-0 -bottom-1 h-0.5 bg-gradient-to-r from-orange-400 to-orange-500 rounded-full transition-all duration-300 ${
+                      isActive ? "w-full" : "w-0 group-hover:w-full"
+                    }`}
+                  ></span>
+                </Link>
+              );
+            })}
           </nav>
 
           {/* Right: Login/Signup */}
