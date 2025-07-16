@@ -64,7 +64,7 @@ const Header: React.FC = ({}) => {
 
         {/* Mobile Hamburger (optional) */}
         <button
-          className="md:hidden text-gray-600 hover:text-gray-800"
+          className="md:hidden text-gray-600 hover:text-gray-800 cursor-pointer"
           onClick={() => setToggleSidebar(true)}
           aria-label="Open Sidebar"
         >

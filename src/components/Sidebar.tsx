@@ -36,7 +36,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
           <div className="flex justify-between items-center mb-4">
             <h3 className="text-xl font-semibold text-gray-800">Restaurant</h3>
             <button
-              className="text-gray-600 hover:text-gray-800"
+              className="text-gray-600 hover:text-gray-800 cursor-pointer"
               onClick={onClose}
               aria-label="Close Sidebar"
             >
