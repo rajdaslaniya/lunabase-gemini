@@ -5,10 +5,8 @@ import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { useRouter } from "next/navigation";
 
 const SignupPage = () => {
-  const router = useRouter();
   const [loading, setLoading] = useState(false);
   const SignupSchema = Yup.object().shape({
     name: Yup.string()
@@ -48,7 +46,7 @@ const SignupPage = () => {
 
       if (response.status === 201) {
         toast.success("User registered successfully!");
-        router.push("/");
+        // Optionally, redirect the user to a success page
       } else {
         toast.error("Failed to register user");
       }
@@ -67,117 +65,91 @@ const SignupPage = () => {
 
   return (
     <Layout>
-      <div className="flex-1 flex flex-col bg-gradient-to-br from-orange-50 via-white to-orange-100 animate-fade-in">
-        <div className="flex-1 flex items-center justify-center py-12">
-          <div className="w-full max-w-md bg-white/90 rounded-2xl shadow-2xl border border-orange-100 p-8 animate-pop-in">
-            <h2 className="text-4xl font-extrabold text-orange-500 mb-8 text-center drop-shadow">
-              Sign Up
-            </h2>
-            <Formik
-              initialValues={{
-                name: "",
-                email: "",
-                password: "",
-              }}
-              validationSchema={SignupSchema}
-              onSubmit={handleSubmit}
-            >
-              {({ errors, touched }) => (
-                <Form>
-                  <div className="mb-4">
-                    <label
-                      htmlFor="name"
-                      className="block text-gray-700 text-sm font-bold mb-2"
-                    >
-                      Name
-                    </label>
-                    <Field
-                      id="name"
-                      name="name"
-                      type="text"
-                      className="border border-orange-200 rounded-lg w-full py-3 px-4 text-gray-700 bg-orange-50 focus:bg-white focus:border-orange-400 focus:ring-2 focus:ring-orange-200 transition-all duration-200 outline-none shadow-sm placeholder-gray-400"
-                      placeholder="Your Name"
-                    />
-                    {errors.name && touched.name ? (
-                      <div className="text-red-500 text-sm mt-1">
-                        {errors.name}
-                      </div>
-                    ) : null}
-                  </div>
-                  <div className="mb-4">
-                    <label
-                      htmlFor="email"
-                      className="block text-gray-700 text-sm font-bold mb-2"
-                    >
-                      Email
-                    </label>
-                    <Field
-                      id="email"
-                      name="email"
-                      type="email"
-                      className="border border-orange-200 rounded-lg w-full py-3 px-4 text-gray-700 bg-orange-50 focus:bg-white focus:border-orange-400 focus:ring-2 focus:ring-orange-200 transition-all duration-200 outline-none shadow-sm placeholder-gray-400"
-                      placeholder="Your Email"
-                    />
-                    {errors.email && touched.email ? (
-                      <div className="text-red-500 text-sm mt-1">
-                        {errors.email}
-                      </div>
-                    ) : null}
-                  </div>
-                  <div className="mb-6">
-                    <label
-                      htmlFor="password"
-                      className="block text-gray-700 text-sm font-bold mb-2"
-                    >
-                      Password
-                    </label>
-                    <Field
-                      id="password"
-                      name="password"
-                      type="password"
-                      className="border border-orange-200 rounded-lg w-full py-3 px-4 text-gray-700 bg-orange-50 focus:bg-white focus:border-orange-400 focus:ring-2 focus:ring-orange-200 transition-all duration-200 outline-none shadow-sm placeholder-gray-400"
-                      placeholder="Your Password"
-                    />
-                    {errors.password && touched.password ? (
-                      <div className="text-red-500 text-sm mt-1">
-                        {errors.password}
-                      </div>
-                    ) : null}
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <button
-                      className="flex items-center justify-center gap-2 bg-orange-500 hover:bg-orange-600 focus:ring-4 focus:ring-orange-200 text-white font-bold py-3 px-6 rounded-lg w-full shadow-lg transition-all duration-200 transform hover:scale-105 active:scale-95 disabled:opacity-60 disabled:cursor-not-allowed"
-                      type="submit"
-                      disabled={loading}
-                    >
-                      {loading ? (
-                        <svg
-                          className="w-5 h-5 animate-spin"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                        >
-                          <circle
-                            className="opacity-25"
-                            cx="12"
-                            cy="12"
-                            r="10"
-                            stroke="currentColor"
-                            strokeWidth="4"
-                          ></circle>
-                          <path
-                            className="opacity-75"
-                            fill="currentColor"
-                            d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
-                          ></path>
-                        </svg>
-                      ) : (
-                        "Sign Up"
-                      )}
-                    </button>
-                  </div>
-                </Form>
-              )}
-            </Formik>
+      <div className="container mx-auto py-12">
+        <div className="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl">
+          <div className="md:flex">
+            <div className="w-full p-8">
+              <h2 className="text-3xl font-bold text-gray-900 mb-6 text-center">
+                Sign Up
+              </h2>
+              <Formik
+                initialValues={{
+                  name: "",
+                  email: "",
+                  password: "",
+                }}
+                validationSchema={SignupSchema}
+                onSubmit={handleSubmit}
+              >
+                {({ errors, touched }) => (
+                  <Form>
+                    <div className="mb-4">
+                      <label
+                        htmlFor="name"
+                        className="block text-gray-700 text-sm font-bold mb-2"
+                      >
+                        Name
+                      </label>
+                      <Field
+                        id="name"
+                        name="name"
+                        type="text"
+                        className="shadow appearance-none border rounded w-full py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        placeholder="Your Name"
+                      />
+                      {errors.name && touched.name ? (
+                        <div className="text-red-500">{errors.name}</div>
+                      ) : null}
+                    </div>
+                    <div className="mb-4">
+                      <label
+                        htmlFor="email"
+                        className="block text-gray-700 text-sm font-bold mb-2"
+                      >
+                        Email
+                      </label>
+                      <Field
+                        id="email"
+                        name="email"
+                        type="email"
+                        className="shadow appearance-none border rounded w-full py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        placeholder="Your Email"
+                      />
+                      {errors.email && touched.email ? (
+                        <div className="text-red-500">{errors.email}</div>
+                      ) : null}
+                    </div>
+                    <div className="mb-6">
+                      <label
+                        htmlFor="password"
+                        className="block text-gray-700 text-sm font-bold mb-2"
+                      >
+                        Password
+                      </label>
+                      <Field
+                        id="password"
+                        name="password"
+                        type="password"
+                        className="shadow appearance-none border rounded w-full py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        placeholder="Your Password"
+                      />
+                      {errors.password && touched.password ? (
+                        <div className="text-red-500">{errors.password}</div>
+                      ) : null}
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <button
+                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded focus:outline-none focus:shadow-outline w-full cursor-pointer"
+                        type="submit"
+                        disabled={loading}
+                      >
+                        {loading ? "Loading..." : "Sign Up"}
+                      </button>
+                    </div>
+                  </Form>
+                )}
+              </Formik>
+            </div>
           </div>
         </div>
       </div>
