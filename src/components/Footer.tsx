@@ -21,7 +21,9 @@ const Footer: React.FC = () => (
           </li>
         ))}
       </ul>
-      <div className="text-center text-xs text-gray-400 mt-2">&copy; {new Date().getFullYear()} Restaurant. All rights reserved.</div>
+      <div className="text-center text-xs text-gray-400 mt-2">
+        &copy; {new Date().getFullYear()} Restaurant. All rights reserved.
+      </div>
     </div>
   </footer>
 );

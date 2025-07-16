@@ -12,8 +12,14 @@ const LoginPage = () => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const LoginSchema = Yup.object().shape({
-    email: Yup.string().trim().email("Please enter a valid email address").required("Email is required"),
-    password: Yup.string().trim().min(8, "Password must be at least 8 characters").required("Password is required"),
+    email: Yup.string()
+      .trim()
+      .email("Please enter a valid email address")
+      .required("Email is required"),
+    password: Yup.string()
+      .trim()
+      .min(8, "Password must be at least 8 characters")
+      .required("Password is required"),
   });
 
   const handleSubmit = async (values: { email: string; password: string }) => {
@@ -56,7 +62,10 @@ const LoginPage = () => {
               {({ errors, touched }) => (
                 <Form>
                   <div className="mb-4">
-                    <label htmlFor="email" className="block text-gray-700 text-sm font-bold mb-2">
+                    <label
+                      htmlFor="email"
+                      className="block text-gray-700 text-sm font-bold mb-2"
+                    >
                       Email
                     </label>
                     <Field
@@ -67,11 +76,16 @@ const LoginPage = () => {
                       placeholder="Your Email"
                     />
                     {errors.email && touched.email ? (
-                      <div className="text-red-500 text-sm mt-1">{errors.email}</div>
+                      <div className="text-red-500 text-sm mt-1">
+                        {errors.email}
+                      </div>
                     ) : null}
                   </div>
                   <div className="mb-6">
-                    <label htmlFor="password" className="block text-gray-700 text-sm font-bold mb-2">
+                    <label
+                      htmlFor="password"
+                      className="block text-gray-700 text-sm font-bold mb-2"
+                    >
                       Password
                     </label>
                     <Field
@@ -82,7 +96,9 @@ const LoginPage = () => {
                       placeholder="Your Password"
                     />
                     {errors.password && touched.password ? (
-                      <div className="text-red-500 text-sm mt-1">{errors.password}</div>
+                      <div className="text-red-500 text-sm mt-1">
+                        {errors.password}
+                      </div>
                     ) : null}
                   </div>
                   <div className="flex items-center justify-between mb-4">
@@ -92,9 +108,24 @@ const LoginPage = () => {
                       disabled={loading}
                     >
                       {loading ? (
-                        <svg className="w-5 h-5 animate-spin" fill="none" viewBox="0 0 24 24">
-                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
+                        <svg
+                          className="w-5 h-5 animate-spin"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                        >
+                          <circle
+                            className="opacity-25"
+                            cx="12"
+                            cy="12"
+                            r="10"
+                            stroke="currentColor"
+                            strokeWidth="4"
+                          ></circle>
+                          <path
+                            className="opacity-75"
+                            fill="currentColor"
+                            d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+                          ></path>
                         </svg>
                       ) : (
                         "Login"
@@ -102,8 +133,13 @@ const LoginPage = () => {
                     </button>
                   </div>
                   <div className="text-center text-sm text-gray-500">
-                    Don't have an account?{' '}
-                    <Link href="/signup" className="text-orange-500 hover:underline font-semibold">Sign Up</Link>
+                    Don't have an account?{" "}
+                    <Link
+                      href="/signup"
+                      className="text-orange-500 hover:underline font-semibold"
+                    >
+                      Sign Up
+                    </Link>
                   </div>
                 </Form>
               )}
