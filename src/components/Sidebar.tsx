@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 
 interface SidebarProps {
   isOpen: boolean;
@@ -10,6 +10,7 @@ interface SidebarProps {
 
 const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
   const router = useRouter();
+  const pathname = usePathname();
 
   const handleLogin = () => {
     router.push("/login");
@@ -47,17 +48,25 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
           </div>
           <nav className="flex-1">
             <ul className="flex flex-col gap-4">
-              {["Home", "About", "Services"].map((item) => (
-                <li key={item}>
-                  <Link
-                    href={item === "Home" ? "/" : `/${item.toLowerCase()}`}
-                    className="block text-lg font-semibold text-gray-700 hover:text-orange-500 px-2 py-2 rounded transition-colors"
-                    onClick={onClose}
-                  >
-                    {item}
-                  </Link>
-                </li>
-              ))}
+              {[
+                { href: "/", label: "Home" },
+                { href: "/about", label: "About" },
+                { href: "/services", label: "Services" },
+              ].map(({ href, label }) => {
+                const isActive = pathname === href;
+                return (
+                  <li key={label}>
+                    <Link
+                      href={href}
+                      className={`block text-lg font-semibold px-2 py-2 rounded transition-colors relative group${isActive ? " text-orange-500" : " text-gray-700 hover:text-orange-500"}`}
+                      onClick={onClose}
+                    >
+                      {label}
+                      <span className={`absolute left-2 right-2 -bottom-1 h-0.5 bg-gradient-to-r from-orange-400 to-orange-500 rounded-full transition-all duration-300 ${isActive ? "w-[90%]" : "w-0 group-hover:w-[90%]"}`}></span>
+                    </Link>
+                  </li>
+                );
+              })}
             </ul>
             <div className="flex flex-col gap-3 mt-8">
               <button
