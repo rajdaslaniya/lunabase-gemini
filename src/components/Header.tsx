@@ -1,13 +1,12 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import Sidebar from "./Sidebar";
 
-interface HeaderProps {
-  onToggleSidebar?: () => void; // optional if no sidebar used
-}
-const Header: React.FC<HeaderProps> = ({ onToggleSidebar }) => {
+const Header: React.FC = ({}) => {
   const router = useRouter();
+  const [toggleSidebar, setToggleSidebar] = useState(false);
 
   const handleLogin = () => {
     router.push("/login");
@@ -64,17 +63,19 @@ const Header: React.FC<HeaderProps> = ({ onToggleSidebar }) => {
         </div>
 
         {/* Mobile Hamburger (optional) */}
-        {onToggleSidebar && (
-          <button
-            className="md:hidden text-gray-600 hover:text-gray-800"
-            onClick={onToggleSidebar}
-            aria-label="Open Sidebar"
-          >
-            <svg className="h-6 w-6 fill-current" viewBox="0 0 24 24">
-              <path d="M3 4h18v2H3V4zm0 7h18v2H3v-2zm0 7h18v2H3v-2z" />
-            </svg>
-          </button>
-        )}
+        <button
+          className="md:hidden text-gray-600 hover:text-gray-800"
+          onClick={() => setToggleSidebar(true)}
+          aria-label="Open Sidebar"
+        >
+          <svg className="h-6 w-6 fill-current" viewBox="0 0 24 24">
+            <path d="M3 4h18v2H3V4zm0 7h18v2H3v-2zm0 7h18v2H3v-2z" />
+          </svg>
+        </button>
+        <Sidebar
+          isOpen={toggleSidebar}
+          onClose={() => setToggleSidebar(false)}
+        />
       </div>
     </header>
   );

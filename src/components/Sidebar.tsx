@@ -23,62 +23,57 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
     <>
       {isOpen && (
         <div
-          className="fixed inset-0 bg-black/40 backdrop-blur-sm z-40"
+          className="fixed top-0 left-0 w-full h-full bg-black opacity-50 z-40"
           onClick={onClose}
         ></div>
       )}
       <div
-        className={`fixed top-0 left-0 h-full w-72 bg-white/90 backdrop-blur-lg shadow-2xl rounded-r-2xl border-r border-orange-100 transform transition-transform duration-300 ease-in-out z-50 ${
+        className={`fixed top-0 left-0 h-full w-64 bg-gray-100 shadow-md transform transition-transform duration-300 ease-in-out z-50 ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
-        <div className="p-6 flex flex-col h-full">
-          <div className="flex justify-between items-center mb-8">
-            <h3 className="text-2xl font-extrabold text-orange-500 tracking-tight">
-              Restaurant
-            </h3>
+        <div className="p-4">
+          <div className="flex justify-between items-center mb-4">
+            <h3 className="text-xl font-semibold text-gray-800">Restaurant</h3>
             <button
-              className="text-orange-400 hover:text-orange-600 text-3xl font-bold"
+              className="text-gray-600 hover:text-gray-800"
               onClick={onClose}
               aria-label="Close Sidebar"
             >
-              &times;
+              <svg className="h-6 w-6 fill-current" viewBox="0 0 24 24">
+                <path d="M18.278 16.864a1 1 0 01-1.414 1.414l-4.829-4.828-4.828 4.828a1 1 0 01-1.414-1.414l4.828-4.829-4.828-4.828a1 1 0 011.414-1.414l4.829 4.828 4.828-4.828a1 1 0 111.414 1.414l-4.828 4.829 4.828 4.828z" />
+              </svg>
             </button>
           </div>
-          <nav className="flex-1">
-            <ul className="flex flex-col gap-4">
+          <nav>
+            <ul className="flex flex-col">
               {["Home", "About", "Services"].map((item) => (
                 <li key={item}>
                   <Link
-                    href={item === "Home" ? "/" : `/${item.toLowerCase()}`}
-                    className="block text-lg font-semibold text-gray-700 hover:text-orange-500 px-2 py-2 rounded transition-colors"
-                    onClick={onClose}
+                    href={`/${item.toLowerCase()}`}
+                    className="text-gray-600 hover:text-gray-800 block py-2 px-4"
                   >
                     {item}
                   </Link>
                 </li>
               ))}
+              <li>
+                <button
+                  className="bg-blue-500 text-white py-2 px-4 rounded block mt-2 mx-4 cursor-pointer"
+                  onClick={handleLogin}
+                >
+                  Login
+                </button>
+              </li>
+              <li>
+                <button
+                  className="bg-green-500 text-white py-2 px-4 rounded block mt-2 mx-4 cursor-pointer"
+                  onClick={handleSignup}
+                >
+                  Signup
+                </button>
+              </li>
             </ul>
-            <div className="flex flex-col gap-3 mt-8">
-              <button
-                className="bg-gradient-to-r from-orange-400 to-orange-500 hover:from-orange-500 hover:to-orange-600 text-white font-bold py-3 px-6 rounded-full shadow-lg transition-all duration-200 outline-none"
-                onClick={() => {
-                  onClose();
-                  handleLogin();
-                }}
-              >
-                Login
-              </button>
-              <button
-                className="bg-white border-2 border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white font-bold py-3 px-6 rounded-full shadow-lg transition-all duration-200 outline-none"
-                onClick={() => {
-                  onClose();
-                  handleSignup();
-                }}
-              >
-                Signup
-              </button>
-            </div>
           </nav>
         </div>
       </div>
