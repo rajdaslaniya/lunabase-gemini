@@ -2,19 +2,20 @@
 import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import Sidebar from "@/components/Sidebar";
 
-interface HeaderProps {
-  onToggleSidebar?: () => void; // optional if no sidebar used
-}
-const Header: React.FC<HeaderProps> = ({ onToggleSidebar }) => {
+const Header: React.FC = () => {
   const router = useRouter();
+  const [mobileOpen, setMobileOpen] = React.useState(false);
 
   const handleLogin = () => {
     router.push("/login");
+    setMobileOpen(false);
   };
 
   const handleSignup = () => {
     router.push("/signup");
+    setMobileOpen(false);
   };
 
   return (
@@ -69,17 +70,19 @@ const Header: React.FC<HeaderProps> = ({ onToggleSidebar }) => {
         </div>
 
         {/* Mobile Hamburger (optional) */}
-        {onToggleSidebar && (
-          <button
-            className="md:hidden text-gray-600 hover:text-gray-800"
-            onClick={onToggleSidebar}
-            aria-label="Open Sidebar"
-          >
-            <svg className="h-6 w-6 fill-current" viewBox="0 0 24 24">
-              <path d="M3 4h18v2H3V4zm0 7h18v2H3v-2zm0 7h18v2H3v-2z" />
-            </svg>
-          </button>
-        )}
+        {/* Hamburger always visible on mobile */}
+        <button
+          className="md:hidden text-orange-500 hover:text-orange-600 p-2 rounded-full border border-orange-100 shadow transition-transform duration-200 hover:scale-110"
+          onClick={() => setMobileOpen((v) => !v)}
+          aria-label="Open Menu"
+        >
+          <svg className="h-7 w-7 fill-current" viewBox="0 0 24 24">
+            <path d="M3 4h18v2H3V4zm0 7h18v2H3v-2zm0 7h18v2H3v-2z" />
+          </svg>
+        </button>
+
+        {/* Mobile Sidebar Drawer */}
+        <Sidebar isOpen={mobileOpen} onClose={() => setMobileOpen(false)} />
       </div>
     </header>
   );
