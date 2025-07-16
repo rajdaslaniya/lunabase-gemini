@@ -88,7 +88,7 @@ const Home = () => {
           <p className="text-2xl md:text-3xl text-gray-200 mb-10 max-w-2xl drop-shadow animate-fade-in delay-150">
             Discover the best dining experience.
           </p>
-          <button className="flex items-center gap-3 bg-orange-500 hover:bg-orange-600 focus:ring-4 focus:ring-orange-300 text-white font-bold py-4 px-10 rounded-full shadow-xl text-xl transition-all duration-300 transform hover:scale-105 active:scale-95 animate-pop-in">
+          <button className="flex items-center gap-3 bg-orange-500 hover:bg-orange-600 focus:ring-4 focus:ring-orange-300 text-white font-bold py-4 px-10 rounded-full shadow-xl text-xl transition-all duration-300 transform hover:scale-105 active:scale-95 animate-pop-in cursor-pointer">
             <svg
               className="w-6 h-6 animate-bounce"
               fill="none"
