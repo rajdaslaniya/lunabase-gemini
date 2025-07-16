@@ -1,11 +1,12 @@
 "use client";
 import React, { useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import Sidebar from "./Sidebar";
 
 const Header: React.FC = ({}) => {
   const router = useRouter();
+  const pathname = usePathname();
   const [toggleSidebar, setToggleSidebar] = useState(false);
 
   const handleLogin = () => {
@@ -28,19 +29,25 @@ const Header: React.FC = ({}) => {
         <nav className="flex-1 hidden md:flex justify-center gap-6">
           <Link
             href="/"
-            className="text-gray-700 hover:text-gray-900 font-medium"
+            className={`text-gray-700 hover:text-gray-900 font-medium transition-all duration-200 border-b-2 border-transparent hover:border-gray-900 ${
+              pathname === "/" ? "!border-b-2 !border-gray-900" : ""
+            }`}
           >
             Home
           </Link>
           <Link
             href="/about"
-            className="text-gray-700 hover:text-gray-900 font-medium"
+            className={`text-gray-700 hover:text-gray-900 font-medium transition-all duration-200 border-b-2 border-transparent hover:border-gray-900 ${
+              pathname === "/about" ? "!border-b-2 !border-gray-900" : ""
+            }`}
           >
             About
           </Link>
           <Link
             href="/services"
-            className="text-gray-700 hover:text-gray-900 font-medium"
+            className={`text-gray-700 hover:text-gray-900 font-medium transition-all duration-200 border-b-2 border-transparent hover:border-gray-900 ${
+              pathname === "/services" ? "!border-b-2 !border-gray-900" : ""
+            }`}
           >
             Services
           </Link>
